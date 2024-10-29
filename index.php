@@ -13,8 +13,8 @@
 
         <!-- Login and Signup Buttons -->
         <div class="button-container">
-            <button class="btn login-btn">Login</button>
-            <button class="btn signup-btn">Sign Up</button>
+            <button id="loginBtn" class="btn login-btn">Login</button>
+            <button id="signupBtn" class="btn signup-btn">Sign Up</button>
         </div>
     </div>
 
@@ -22,5 +22,6 @@
     <footer>
         <p>Designed and Developed by Shaurya,Sarthak,Shreshtha,Harsh</p>
     </footer>
+    <script src="indexscript.js"></script>
 </body>
 </html>
