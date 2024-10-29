@@ -1,0 +1,75 @@
+/* Reset some default styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main Container */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #c1d9ff, #d6f0ff);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+}
+
+/* Main Heading */
+.main-heading {
+    font-size: 2.5rem;
+    color: #034f84;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.signup-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Button Hover Effect */
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.signup-btn:hover {
+    background-color: #218838;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+}
