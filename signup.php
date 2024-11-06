@@ -1,57 +1,105 @@
-!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
     <title>Signup - JIIT Cab Pooling</title>
-    <link rel="stylesheet" href="signup.css">
+    
 </head>
 <body>
-    <div class="signup-container">
-        <h2>Signup for JIIT Cab Pooling</h2>
-        <form action="submit_signup.php" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+    <div class="container">
+    <div class="box form-box">
+    <?php 
+         
+         include("php/config.php");
+         if(isset($_POST['submit'])){
+            $name = $_POST['name'];
+            $enrollment_num = $_POST['enrollment_num'];
+            $age = $_POST['age'];
+            $gender = $_POST['gender'];
+            $year = $_POST['year'];
+            $email_id = $_POST['email_id'];
+            $phone_num = $_POST['phone_num'];
+            $password = $_POST['password'];
 
-            <label for="enrollment">Enrollment Number:</label>
-            <input type="text" id="enrollment" name="enrollment" required>
+            //verify the unique enrollment and email
 
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age" required min="17" max="100">
+            $verify_enrollment_num = mysqli_query($con,"SELECT enrollment_num FROM user_info WHERE enrollment_num = '$enrollment_num'");
+            $verify_emailid = mysqli_query($con,"SELECT email_id FROM user_info WHERE email_id='$email_id'");
 
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
+            if(mysqli_num_rows($verify_enrollment_num) !=0 )
+            {
+                echo "<div class='message'>
+                      <p>This enrollment number is used, Try another One Please!</p>
+                  </div> <br>";
+                echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
+            }
 
-            <label for="year">Year:</label>
-            <select id="year" name="year" required>
-                <option value="">Select Year</option>
-                <option value="1">1st Year</option>
-                <option value="2">2nd Year</option>
-                <option value="3">3rd Year</option>
-                <option value="4">4th Year</option>
-            </select>
+            else if(mysqli_num_rows($verify_emailid) !=0 )
+            {
+                echo "<div class='message'>
+                      <p>This email is used, Try another One Please!</p>
+                  </div> <br>";
+                echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
+            }
+            else
+            {
+                mysqli_query($con,"INSERT INTO user_info(name,enrollment_num,age,gender,year,email_id,phone_num,password,created_at) VALUES('$name','$enrollment_num','$age','$gender','$year','$email_id','$phone_num','$password',NOW())") or die("Erroe Occured");
 
-            <label for="branch">Branch:</label>
-            <select id="branch" name="branch" required>
-                <option value="">Select Branch</option>
-                <option value="CSE">Computer Science</option>
-                <option value="IT">Information Technology</option>
-                <option value="ECE">Electronics and Communication</option>
-                <option value="EEE">Electrical and Electronics</option>
-                <option value="ME">Mechanical</option>
-                <!-- Add other branches if needed -->
-            </select>
+            echo "<div class='message'>
+                      <p>Registration successfully!</p>
+                  </div> <br>";
+            echo "<a href='index.php'><button class='btn'>Login Now</button>";
+            
+            
+            }
+        }else{
+         
+            ?>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit" class="submit-btn">Sign Up</button>
-        </form>
-    </div>
+         
+    <header>Signup</header><br><br>
+    <form action="" method="post">
+        <div class="field input">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" autocomplete="off" required>
+        </div>
+        <div class="field input">
+            <label for="enrollment_num">Enrollment Number</label>
+            <input type="number" name="enrollment_num" autocomplete="off" id="enrollment_num" required>
+        </div>
+        <div class="field input">
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" autocomplete="off" required>
+        </div>
+        <div class="field input">
+            <label for="gender">Gender</label>
+            <input type="text" name="gender" id="gender" autocomplete="off" required>
+        </div>
+        <div class="field input">
+            <label for="year">Year</label>
+            <input type="text" name="year" id="year" autocomplete="off" required>
+        </div>
+        <div class="field input">
+            <label for="email_id">Email Id</label>
+            <input type="text" name="email_id" id="email_id" autocomplete="off" required>
+        </div>
+        <div class="field input">
+            <label for="phone_num">Phone Number</label>
+            <input type="number" name="phone_num" id="phone_num" autocomplete="off" required>
+        </div>
+        <div class="field input">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" autocomplete="off" required>
+        </div>
+        <br>
+        <div class="field">
+                    
+            <input type="submit" class="btn" name="submit" value="Register" required>
+        </div>
+        </div>
+        <?php } ?>
+        </div>
 </body>
 </html>
