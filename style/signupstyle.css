@@ -6,7 +6,7 @@
     font-family: 'Poppins',sans-serif;
 }
 body{
-    background: #e4e9f7;
+    background: black;
 }
 .container{
     display: flex;
@@ -70,4 +70,3 @@ body{
 .links{
     margin-bottom: 15px;
 }
-
