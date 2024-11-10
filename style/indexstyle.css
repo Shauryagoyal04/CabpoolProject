@@ -1,13 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 /* Body Styling */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'poppins', sans-serif;
     color: #333;
     display: flex;
     justify-content: flex-start; /* Shift content to the left */
     align-items: center;
     min-height: 100vh;
     text-align: center;
-    background-image: url('/style/background\ \(1\).jpg');
+    background-image: url('backgroundimg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -40,8 +41,8 @@ body::before {
 
 /* Main Heading Styling */
 .main-heading {
-    font-family: 'Oswald', sans-serif;
-    font-size: 3rem; /* Larger font size for the heading */
+    font-family: 'poppins', sans-serif;
+    font-size: 5rem; /* Larger font size for the heading */
     font-weight: 700;
     color: white;
     margin-bottom: 30px;
@@ -58,9 +59,10 @@ body::before {
     color: white;
     margin-bottom: 30px;
     letter-spacing: 2px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Optional text shadow for a little depth */
     position: relative;
+    text-align: left;
     top: -50px; /* Moves the heading up by 50px (you can adjust this value) */
 }
 
