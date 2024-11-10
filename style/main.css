@@ -1,0 +1,241 @@
+   /* Navbar Styling */
+   .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #333;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Logo Styling on Left */
+  .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  /* Dropdown Menu Styling */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #444;
+    min-width: 160px;
+    z-index: 1;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  .dropdown-content a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #555;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Create Ride Button Styling */
+  .create-ride-btn {
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .create-ride-btn:hover {
+    background-color: #218838;
+  }
+
+  /* Main Content Styling */
+  .main-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Search Bar Styling */
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .search-bar input, .search-bar select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+
+  /* Search Button Styling */
+  .search-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .search-btn:hover {
+    background-color: #0056b3;
+  }
+
+  /* Navbar Right Section */
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+       /* Ride List Styling */
+    .ride-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    /* Individual Ride Card Styling */
+    .ride-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-family: Arial, sans-serif;
+    }
+
+    .ride-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .ride-info span {
+      font-size: 0.9em;
+      color: #333;
+    }
+
+    .ride-owner {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .join-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .join-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+label {
+  display: block;
+  margin: 8px 0 4px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Message box styling */
+.message-box {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.message-box.error {
+  background-color: #dc3545;
+}
+
+.close-message-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
