@@ -12,8 +12,11 @@
         <h1 class="main-heading">JIIT CAB POOLING</h1>
 
         <!-- Login and Signup Buttons -->
-        <div class="button-container">
-            <button id="loginBtn" class="btn login-btn">Login</button>
+        <div class="btn login-btn">
+        <a href="login.html" class="button-link">
+            <button>login</button>
+        </a>
+            <!-- <button id="loginBtn" class="btn login-btn">Login</button> -->
             <button id="signupBtn" class="btn signup-btn">Sign Up</button>
         </div>
     </div>
