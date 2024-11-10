@@ -22,6 +22,6 @@
     <footer>
         <p>Designed and Developed by Shaurya,Sarthak,Shreshtha,Harsh</p>
     </footer>
-    <script src="indexscript.js"></script>
+    <script src="javascript/indexscript.js"></script>
 </body>
 </html>
