@@ -4,7 +4,7 @@ const signupBtn = document.getElementById('signupBtn');
 
 // Add event listeners for click events
 loginBtn.addEventListener('click', () => {
-    window.location.href = 'test.html';
+    window.location.href = 'login.php';
 });
 
 signupBtn.addEventListener('click', () => {
