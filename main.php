@@ -8,6 +8,11 @@
 </head>
 <body>
 
+  <!-- Success/Error Message Box -->
+  <div id="messageBox" class="message-box">
+    <span id="messageText"></span>
+    <span class="close-message-btn" onclick="closeMessageBox()">&times;</span>
+  </div>
   <!-- Navbar -->
   <div class="navbar">
     <!-- Logo on Left -->
@@ -18,7 +23,7 @@
     <!-- Right Side: Create Ride Button and Dropdown Menu -->
     <div class="navbar-right">
       <!-- Create Ride Button -->
-      <button class="create-ride-btn">Create Ride</button>
+      <button id="createRideBtn" class="create-ride-btn">Create Ride</button>
 
       <!-- Dropdown Menu -->
       <div class="dropdown">
@@ -32,6 +37,35 @@
       </div>
     </div>
   </div>
+  <!-- Create Ride Modal -->
+<div id="createRideModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>Create a New Ride</h2>
+    <form id="rideForm">
+      <label for="owner_name">Name:</label>
+      <input type="text" name="owner_name" id="owner_name" required>
+
+      <label for="enrollment_num">Enrollment Number:</label>
+      <input type="text" name="enrollment_num" id="enrollment_num" required>
+
+      <label for="leaving_from">Leaving From:</label>
+      <input type="text" name="leaving_from" id="leaving_from" required>
+
+      <label for="going_to">Going To:</label>
+      <input type="text" name="going_to" id="going_to" required>
+
+      <label for="ride_time">Date and Time:</label>
+      <input type="datetime-local" name="ride_time" id="ride_time" required>
+
+      <label for="seats_available">Seats Available:</label>
+      <input type="number" name="seats_available" id="seats_available" required min="1">
+
+      <button type="button" onclick="submitRideForm()">Submit</button>
+    </form>
+  </div>
+</div>
+
 
   <!-- Main Content -->
   <div class="main-content">
@@ -87,5 +121,6 @@
     $conn->close();
     ?>
   </div>
+  <script src="javascript/main.js"></script>
 </body>
 </html>
