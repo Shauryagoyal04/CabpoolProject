@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/signupstyle.css">
     <title>Login- JIIT Cab Pooling</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
                     $_SESSION['valid'] = $row['email_id'];
                     $_SESSION['name'] = $row['name'];
                     $_SESSION['age'] = $row['age'];
-                    $_SESSION['password']=$row['password'];
+                    
                 }else{
                     echo "<div class='message'>
                       <p>Wrong Username or Password</p>
@@ -35,7 +35,7 @@
                    echo "<a href='index.php'><button class='btn'>Go Back</button>";
          
                 }
-                if(isset($_SESSION['valid']) && ($_SESSION['password'])){
+                if(isset($_SESSION['valid']) ){
                     header("Location:main.php ");
                 }
               }else{

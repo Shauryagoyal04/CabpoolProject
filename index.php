@@ -13,11 +13,8 @@
         <h2 class="about">Welcome to RideShare, your trusted partner for convenient and affordable ridesharing. Our goal is to help you get from point A to point B in a smarter way—by sharing rides with others who are traveling the same way!</h2>
 
         <!-- Login and Signup Buttons -->
-        <div class="btn login-btn">
-        <a href="login.html" class="button-link">
-            <button>login</button>
-        </a>
-            <!-- <button id="loginBtn" class="btn login-btn">Login</button> -->
+        <div class="button-container">
+            <button id="loginBtn" class="btn login-btn">Login</button>
             <button id="signupBtn" class="btn signup-btn">Sign Up</button>
         </div>
     </div>
