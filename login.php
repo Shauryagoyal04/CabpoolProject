@@ -13,39 +13,44 @@
 <body>
       <div class="container">
         <div class="box form-box">
-            <?php 
-             
-              include("php/config.php");
-              if(isset($_POST['submit'])){
-                $email = mysqli_real_escape_string($con,$_POST['email']);
-                $password = mysqli_real_escape_string($con,$_POST['password']);
+                <?php
+        // session_start();
+        include("php/config.php");
 
-                $result = mysqli_query($con,"SELECT * FROM user_info WHERE email_id='$email' AND password='$password'  ") or die("Select Error");
-                $row = mysqli_fetch_assoc($result);
+        if (isset($_POST['submit'])) {
+            // Escape the input values to avoid SQL injection
+            $email_id = mysqli_real_escape_string($con, $_POST['email_id']);
+            $password = mysqli_real_escape_string($con, $_POST['password']);
 
-                if(is_array($row) && !empty($row)){
-                    $_SESSION['valid'] = $row['email_id'];
-                    $_SESSION['name'] = $row['name'];
-                    $_SESSION['age'] = $row['age'];
-                    
-                }else{
-                    echo "<div class='message'>
-                      <p>Wrong Username or Password</p>
-                       </div> <br>";
-                   echo "<a href='index.php'><button class='btn'>Go Back</button>";
-         
-                }
-                if(isset($_SESSION['valid']) ){
-                    header("Location:main.php ");
-                }
-              }else{
+            // Query to check if the email and password match
+            $result = mysqli_query($con, "SELECT * FROM user_info WHERE email_id='$email_id' AND password='$password'") or die("Select Error");
 
-            
-            ?>
+            // Fetch the result as an associative array
+            $row = mysqli_fetch_assoc($result);
+
+            // Check if a valid row was returned (both email and password are correct)
+            if ($row) {
+                $_SESSION['valid'] = $row['email_id'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['age'] = $row['age'];
+
+                // Redirect to the main page
+                header("Location: main.php");
+                exit(); // Always call exit() after header redirection
+            } else {
+                // If no valid row found, display error message
+                echo "<div class='message'>
+                        <p>Wrong Username or Password</p>
+                    </div><br>";
+                echo "<a href='index.php'><button class='btn'>Go Back</button></a>";
+            }
+        }else{
+        ?>
+
             <form action="login.php" method="post">
                 <div class="field input">
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email" autocomplete="off" required>
+                    <input type="text" name="email_id" id="email" autocomplete="off" required>
                 </div>
 
                 <div class="field input">
