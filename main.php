@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+} else {
+    header("Location: index.php"); // Redirect to login if not set
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +18,12 @@
   <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
+
+  <?php
+  if (isset($_GET['message'])) {
+    echo "<div class='joinride-message-box'>" . htmlspecialchars($_GET['message']) . "</div>";
+  }
+  ?>
 
   <!-- Success/Error Message Box -->
   <div id="messageBox" class="message-box">
@@ -90,36 +107,44 @@
 
  <!-- Upcoming Rides Section -->
  <div class="ride-list">
-    <?php
-    // PHP to fetch ride data from MySQL and display each ride
-    $conn = new mysqli("localhost", "root", "", "cabpoolproject");
+  <?php
+  
+  // $username = $_SESSION['username']; // Fetch the logged-in user's name
 
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+  $conn = new mysqli("localhost", "root", "", "cabpoolproject");
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "SELECT id, leaving_from, going_to, owner_name, ride_time, seats_available, rider1_name, rider2_name FROM rides WHERE ride_time >= NOW() AND seats_available>0 ORDER BY ride_time ASC";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      echo "<div class='ride-card'>";
+      echo "<div class='ride-info'>";
+      echo "<span><strong>From:</strong> " . $row["leaving_from"] . "</span>";
+      echo "<span><strong>To:</strong> " . $row["going_to"] . "</span>";
+      echo "<span class='ride-owner'>Driver: " . $row["owner_name"] . "</span>";
+      echo "<span><strong>Time:</strong> " . $row["ride_time"] . "</span>";
+      echo "<span><strong>Seats Available:</strong> " . $row["seats_available"] . "</span>";
+      echo "</div>";
+      
+      // Join button form
+      echo "<form action='php/join_ride.php' method='POST'>";
+      echo "<input type='hidden' name='ride_id' value='" . $row["id"] . "'>";
+      echo "<button type='submit' class='join-btn'>Join Ride</button>";
+      echo "</form>";
+
+      echo "</div>";
     }
+  } else {
+    echo "<p>No upcoming rides available.</p>";
+  }
 
-    $sql = "SELECT leaving_from, going_to, owner_name, ride_time, seats_available FROM rides WHERE ride_time >= NOW() ORDER BY ride_time ASC";
-    $result = $conn->query($sql);
+  $conn->close();
+  ?>
 
-    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        echo "<div class='ride-card'>";
-        echo "<div class='ride-info'>";
-        echo "<span><strong>From:</strong> " . $row["leaving_from"] . "</span>";
-        echo "<span><strong>To:</strong> " . $row["going_to"] . "</span>";
-        echo "<span class='ride-owner'>Driver: " . $row["owner_name"] . "</span>";
-        echo "<span><strong>Time:</strong> " . $row["ride_time"] . "</span>";
-        echo "<span><strong>Seats Available:</strong> " . $row["seats_available"] . "</span>";
-        echo "</div>";
-        echo "<button class='join-btn'>Join Ride</button>";
-        echo "</div>";
-      }
-    } else {
-      echo "<p>No upcoming rides available.</p>";
-    }
-
-    $conn->close();
-    ?>
   </div>
   <script src="javascript/main.js"></script>
 </body>

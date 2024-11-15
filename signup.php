@@ -14,7 +14,7 @@
          
          include("php/config.php");
          if(isset($_POST['submit'])){
-            $name = $_POST['name'];
+            $username = $_POST['username'];
             $enrollment_num = $_POST['enrollment_num'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
@@ -45,7 +45,7 @@
             }
             else
             {
-                mysqli_query($con,"INSERT INTO user_info(name,enrollment_num,age,gender,year,email_id,phone_num,password,created_at) VALUES('$name','$enrollment_num','$age','$gender','$year','$email_id','$phone_num','$password',NOW())") or die("Erroe Occured");
+                mysqli_query($con,"INSERT INTO user_info(username,enrollment_num,age,gender,year,email_id,phone_num,password,created_at) VALUES('$name','$enrollment_num','$age','$gender','$year','$email_id','$phone_num','$password',NOW())") or die("Erroe Occured");
 
             echo "<div class='message'>
                       <p>Registration successfully!</p>
@@ -63,7 +63,7 @@
     <form action="" method="post">
         <div class="field input">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" autocomplete="off" required>
+            <input type="text" name="username" id="username" autocomplete="off" required>
         </div>
         <div class="field input">
             <label for="enrollment_num">Enrollment Number</label>
