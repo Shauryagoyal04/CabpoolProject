@@ -45,7 +45,7 @@
             }
             else
             {
-                mysqli_query($con,"INSERT INTO user_info(username,enrollment_num,age,gender,year,email_id,phone_num,password,created_at) VALUES('$name','$enrollment_num','$age','$gender','$year','$email_id','$phone_num','$password',NOW())") or die("Erroe Occured");
+                mysqli_query($con,"INSERT INTO user_info(username,enrollment_num,age,gender,year,email_id,phone_num,password,created_at) VALUES('$username','$enrollment_num','$age','$gender','$year','$email_id','$phone_num','$password',NOW())") or die("Erroe Occured");
 
             echo "<div class='message'>
                       <p>Registration successfully!</p>
