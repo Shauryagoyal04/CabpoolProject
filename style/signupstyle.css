@@ -1,72 +1,141 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-    padding: 0;
+/* General Reset */
+* {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
 }
-body{
-    background: black;
-}
-.container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 90vh;
-}
-.box{
-    background: #fdfdfd;
-    display: flex;
-    flex-direction: column;
-    padding: 25px 25px;
-    border-radius: 20px;
-    box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
-                0 32px 64px -48px rgba(0,0,0,0.5);
-}
-.form-box{
-    width: 450px;
-    margin: 0px 10px;
-}
-.form-box header{
-    font-size: 25px;
-    font-weight: 600;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e6e6e6;
-    margin-bottom: 10px;
-}
-.form-box form .field{
-    display: flex;
-    margin-bottom: 10px;
-    flex-direction: column;
 
+/* Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('bgcabpool.jpg') no-repeat center center fixed; /* Background Image */
+    background-size: cover; /* Make the background cover the entire page */
+    color: #414141; /* Default text color (Dark Gray) */
+    line-height: 1.6;
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
 }
-.form-box form .input input{
-    height: 40px;
+
+/* Background Overlay */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: -1; /* Place the overlay behind the content */
+}
+
+/* Container for Signup Form */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form Box */
+.box {
+    background-color: #2b2d2e; /* Darker Gray for form box background */
+    padding: 30px 40px;
+    width: 400px;
+    text-align: center;
+    border-radius: 50px; /* Curved corners for the form (50px curve) */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Soft shadow with higher opacity */
+    position: relative; /* To position the pseudo element */
+}
+
+/* Form Box Gradient Border */
+.box::before {
+    content: '';
+    position: absolute;
+    top: -5px; 
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(145deg, #f39c12, #1565c0); /* Yellow to Blue gradient */
+    border-radius: 50px; /* Apply curve to the gradient outline */
+    z-index: -1; /* Ensure the border is behind the form content */
+}
+
+/* Header */
+header {
+    font-size: 28px;
+    color: #f8f9fae9; /* Light Gray for the title */
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+/* Form Field */
+.field {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Input fields */
+.input input {
     width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border: 1px solid #303132; /* Light Gray border for the input fields */
+    border-radius: 50px; /* Curved corners for input fields (50px curve) */
     font-size: 16px;
-    padding: 0 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    color: #ecf0f1; /* Light Gray text color */
+    background-color: #33373a; /* Slightly lighter gray for the input fields */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Focus Effect */
+.input input:focus {
     outline: none;
+    border-color: #f39c12; /* Yellow border color on focus */
+    box-shadow: 0 0 10px #f39c12; /* Add glowing effect with yellow outline */
 }
-.btn{
-    height: 35px;
-    background: rgba(76,68,182,0.808);
-    border: 0;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 15px;
+
+/* Input Placeholder Styling */
+.input input::placeholder {
+    color: #6f7070; /* Grayish color for placeholder */
+    opacity: 1; /* Ensures placeholder text is visible */
+}
+
+/* Submit Button */
+.btn {
+    background-color: #1565c0; /* Blue color */
+    color: white;
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px; /* Curved corners for the button (50px curve) */
     cursor: pointer;
-    transition: all .3s;
-    margin-top: 10px;
-    padding: 0px 10px;
-}
-.btn:hover{
-    opacity: 0.82;
-}
-.submit{
+    transition: background-color 0.3s ease;
     width: 100%;
+}
+
+/* Hover effect for button */
+.btn:hover {
+    background-color: #0d47a1; /* Darker Blue when hovered */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    header {
+        font-size: 24px;
+    }
 }
 .links{
-    margin-bottom: 15px;
+    color: #7a7a7a;
+}
+.links a{
+    color: #247bdf;
+    text-decoration-line: none;
+    font-weight: 600;
 }

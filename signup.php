@@ -2,104 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/signupstyle.css">
     <title>Signup - JIIT Cab Pooling</title>
-    
 </head>
 <body>
+    <h2>𐂯RIDESHARE</h2>
     <div class="container">
-    <div class="box form-box">
-    <?php 
-         
-         include("php/config.php");
-         if(isset($_POST['submit'])){
-            $username = $_POST['username'];
-            $enrollment_num = $_POST['enrollment_num'];
-            $age = $_POST['age'];
-            $gender = $_POST['gender'];
-            $year = $_POST['year'];
-            $email_id = $_POST['email_id'];
-            $phone_num = $_POST['phone_num'];
-            $password = $_POST['password'];
+        <div class="box form-box">
+        <?php 
+        include("php/config.php");
 
-            //verify the unique enrollment and email
+        if (isset($_POST['submit'])) {
+            $username = htmlspecialchars($_POST['username']);
+            $email_id = htmlspecialchars($_POST['email_id']);
+            $phone_num = htmlspecialchars($_POST['phone_num']);
+            $password = htmlspecialchars($_POST['password']);
 
-            $verify_enrollment_num = mysqli_query($con,"SELECT enrollment_num FROM user_info WHERE enrollment_num = '$enrollment_num'");
-            $verify_emailid = mysqli_query($con,"SELECT email_id FROM user_info WHERE email_id='$email_id'");
-
-            if(mysqli_num_rows($verify_enrollment_num) !=0 )
-            {
-                echo "<div class='message'>
-                      <p>This enrollment number is used, Try another One Please!</p>
-                  </div> <br>";
-                echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
+            // Validate email and phone number
+            if (!filter_var($email_id, FILTER_VALIDATE_EMAIL)) {
+                echo "<div class='message'><p>Invalid email format!</p></div><br>";
+                echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button></a>";
+                exit();
+            }
+            if (strlen($phone_num) != 10) {
+                echo "<div class='message'><p>Phone number must be 10 digits!</p></div><br>";
+                echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button></a>";
+                exit();
             }
 
-            else if(mysqli_num_rows($verify_emailid) !=0 )
-            {
-                echo "<div class='message'>
-                      <p>This email is used, Try another One Please!</p>
-                  </div> <br>";
-                echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
-            }
-            else
-            {
-                mysqli_query($con,"INSERT INTO user_info(username,enrollment_num,age,gender,year,email_id,phone_num,password,created_at) VALUES('$username','$enrollment_num','$age','$gender','$year','$email_id','$phone_num','$password',NOW())") or die("Erroe Occured");
+            // Verify email uniqueness
+            $verify_emailid = mysqli_query($con, "SELECT email_id FROM user_info WHERE email_id='$email_id'");
+            if (mysqli_num_rows($verify_emailid) != 0) {
+                echo "<div class='message'><p>This email is already in use. Try another one!</p></div><br>";
+                echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button></a>";
+            } else {
+                // Insert user data into the database
+                $stmt = $con->prepare("INSERT INTO user_info(username, email_id, phone_num, password, created_at) VALUES (?, ?, ?, ?, NOW())");
+                $stmt->bind_param("ssss", $username, $email_id, $phone_num, $password);
 
-            echo "<div class='message'>
-                      <p>Registration successfully!</p>
-                  </div> <br>";
-            echo "<a href='index.php'><button class='btn'>Login Now</button>";
-            
-            
+                if ($stmt->execute()) {
+                    echo "<div class='message'><p>Registration successful!</p></div><br>";
+                    echo "<a href='index.php'><button class='btn'>Login Now</button></a>";
+                } else {
+                    echo "<div class='message'><p>Error: " . $stmt->error . "</p></div><br>";
+                }
+                $stmt->close();
             }
-        }else{
-         
-            ?>
-
-         
-    <header>Signup</header><br><br>
-    <form action="" method="post">
-        <div class="field input">
-            <label for="name">Name</label>
-            <input type="text" name="username" id="username" autocomplete="off" required>
-        </div>
-        <div class="field input">
-            <label for="enrollment_num">Enrollment Number</label>
-            <input type="number" name="enrollment_num" autocomplete="off" id="enrollment_num" required>
-        </div>
-        <div class="field input">
-            <label for="age">Age</label>
-            <input type="number" name="age" id="age" autocomplete="off" required>
-        </div>
-        <div class="field input">
-            <label for="gender">Gender</label>
-            <input type="text" name="gender" id="gender" autocomplete="off" required>
-        </div>
-        <div class="field input">
-            <label for="year">Year</label>
-            <input type="text" name="year" id="year" autocomplete="off" required>
-        </div>
-        <div class="field input">
-            <label for="email_id">Email Id</label>
-            <input type="text" name="email_id" id="email_id" autocomplete="off" required>
-        </div>
-        <div class="field input">
-            <label for="phone_num">Phone Number</label>
-            <input type="number" name="phone_num" id="phone_num" autocomplete="off" required>
-        </div>
-        <div class="field input">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" autocomplete="off" required>
-        </div>
-        <br>
-        <div class="field">
-                    
-            <input type="submit" class="btn" name="submit" value="Register" required>
-        </div>
-        </div>
+        } else {
+        ?>
+            <header>SignUp</header>
+            <form action="" method="post">
+                <div class="field input">
+                    <input type="text" name="username" id="username" placeholder="Name" autocomplete="off" required>
+                </div>
+                <div class="field input">
+                    <input type="email" name="email_id" id="email_id" placeholder="Email" autocomplete="off" required>
+                </div>
+                <div class="field input">
+                    <input type="number" name="phone_num" id="phone_num" placeholder="Phone Number" autocomplete="off" required>
+                </div>
+                <div class="field input">
+                    <input type="password" name="password" id="password" placeholder="Password" autocomplete="off" required>
+                </div>
+                <div class="field">
+                    <input type="submit" class="btn" name="submit" value="Register">
+                </div>
+            </form>
         <?php } ?>
         </div>
+    </div>
 </body>
 </html>

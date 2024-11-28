@@ -60,12 +60,6 @@ if (isset($_SESSION['username'])) {
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <h2>Create a New Ride</h2>
     <form id="rideForm">
-      <label for="owner_name">Name:</label>
-      <input type="text" name="owner_name" id="owner_name" required>
-
-      <label for="enrollment_num">Enrollment Number:</label>
-      <input type="text" name="enrollment_num" id="enrollment_num" required>
-
       <label for="leaving_from">Leaving From:</label>
       <input type="text" name="leaving_from" id="leaving_from" required>
 
@@ -131,10 +125,13 @@ if (isset($_SESSION['username'])) {
       echo "</div>";
       
       // Join button form
-      echo "<form action='php/join_ride.php' method='POST'>";
+      
+      echo "<form>";
       echo "<input type='hidden' name='ride_id' value='" . $row["id"] . "'>";
-      echo "<button type='submit' class='join-btn'>Join Ride</button>";
+      echo "<button type='button' class='join-btn' data-ride-id='" . $row["id"] . "' onclick='confirmJoinRide(this)'>Join Ride</button>";
       echo "</form>";
+
+
 
       echo "</div>";
     }

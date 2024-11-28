@@ -11,8 +11,10 @@
     <title>Login - JIIT Cab Pooling</title>
 </head>
 <body>
+<h2>𐂯RIDESHARE</h2>
     <div class="container">
         <div class="box form-box">
+        <header>Login</header>
             <?php
             include("php/config.php");
 
@@ -31,7 +33,6 @@
                 if ($row) {
                     $_SESSION['valid'] = $row['email_id'];
                     $_SESSION['username'] = $row['username'];  // Setting username for use on other pages
-                    $_SESSION['age'] = $row['age'];
 
                     // Redirect to main.php after successful login
                     header("Location: main.php");
@@ -48,20 +49,18 @@
 
             <form action="login.php" method="post">
                 <div class="field input">
-                    <label for="email">Email</label>
-                    <input type="text" name="email_id" id="email" autocomplete="off" required>
+                    <input type="text" name="email_id" id="email" placeholder="Email" autocomplete="off" required>
                 </div>
 
                 <div class="field input">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" autocomplete="off" required>
+                    <input type="password" name="password" id="password" placeholder="Password" autocomplete="off" required>
                 </div>
 
                 <div class="field">
                     <input type="submit" class="btn" name="submit" value="Login" required>
                 </div>
                 <div class="links">
-                    Don't have an account? <a href="signup.php">Sign Up Now</a>
+                    Don't have an account? <a href="signup.php">SignUp</a>
                 </div>
             </form>
         </div>
