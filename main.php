@@ -79,25 +79,21 @@ if (isset($_SESSION['username'])) {
 
 
   <!-- Main Content -->
-  <div class="main-content">
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <input type="text" placeholder="Leaving From">
-      <input type="text" placeholder="Going To">
-      <input type="date" placeholder="Date">
-      <select>
-        <option value="">Passengers</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5+</option>
-      </select>
-    </div>
+  <div class="search-bar">
+   <input type="text" name="leaving_from" placeholder="Leaving From" />
+   <input type="text" name="going_to" placeholder="Going To" />
+   <input type="date" name="ride_date" placeholder="Date" />
+   <select name="passengers">
+     <option value="">Passengers</option>
+     <option value="1">1</option>
+     <option value="2">2</option>
+   </select>
+</div>
 
-    <!-- Search Button -->
-    <button class="search-btn">Search</button>
-  </div>
+<!-- Search Button -->
+<button class="search-btn" id="search-btn">Search</button>
+
+<div id="rides-container"></div>
 
  <!-- Upcoming Rides Section -->
  <div class="ride-list">
@@ -114,8 +110,9 @@ if (isset($_SESSION['username'])) {
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
+      echo "<div class='upcoming-rides-heading'>UPCOMING RIDES</div>";
     while ($row = $result->fetch_assoc()) {
-      echo "<div class='ride-card'>";
+      echo "<div class='ride-card' id='ride-card'>";
       echo "<div class='ride-info'>";
       echo "<span><strong>From:</strong> " . $row["leaving_from"] . "</span>";
       echo "<span><strong>To:</strong> " . $row["going_to"] . "</span>";

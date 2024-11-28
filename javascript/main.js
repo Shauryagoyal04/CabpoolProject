@@ -77,7 +77,116 @@ function confirmJoinRide(button) {
           console.error(error);
       });
   }
+}document.querySelector(".search-btn").addEventListener("click", function () {
+  // Get values from the search bar
+  const leavingFrom = document.querySelector('input[placeholder="Leaving From"]').value;
+  const goingTo = document.querySelector('input[placeholder="Going To"]').value;
+  const rideDate = document.querySelector('input[placeholder="Date"]').value;
+  const passengers = document.querySelector('select').value;
+
+  // Prepare request data
+  const requestData = {
+      leaving_from: leavingFrom,
+      going_to: goingTo,
+      ride_date: rideDate,
+      passengers: passengers,
+  };
+
+  // Send a request to the PHP file to fetch the filtered results
+  fetch("php/searchrides.php", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+      // Log the data to see if it's being fetched correctly
+      console.log(data);
+
+      // Display results or an error message
+      const resultsContainer = document.querySelector("#rides-container");
+      resultsContainer.innerHTML = ""; // Clear previous results
+
+      if (data.success) {
+          displaySearchResults(data.rides);
+      } else {
+          // Display "No rides found" message
+          const resultMessage = document.createElement("div");
+          resultMessage.classList.add("result-message");
+          resultMessage.innerHTML = `<span><strong>No rides found</strong></span>`;
+          resultsContainer.appendChild(resultMessage);
+
+          // Show upcoming rides again if no results found
+          hideUpcomingRides();
+      }
+  })
+  .catch((error) => {
+      console.error("Error:", error);
+  });
+});
+
+function displaySearchResults(rides) {
+  // Clear previous search results
+  const resultsContainer = document.querySelector("#rides-container");
+  resultsContainer.innerHTML = ""; // Clear existing rides
+
+  // Hide upcoming rides when showing search results
+  hideUpcomingRides();
+
+  // Add the filtered rides dynamically
+  rides.forEach((ride) => {
+      const rideCard = document.createElement("div");
+      rideCard.classList.add("ride-card");
+
+      // Ride Info
+      const rideInfo = document.createElement("div");
+      rideInfo.classList.add("ride-info");
+
+      rideInfo.innerHTML = `
+          <span><strong>From:</strong> ${ride.leaving_from}</span>
+          <span><strong>To:</strong> ${ride.going_to}</span>
+          <span class='ride-owner'>Driver: ${ride.owner_name}</span>
+          <span><strong>Time:</strong> ${ride.ride_time}</span>
+          <span><strong>Seats Available:</strong> ${ride.seats_available}</span>
+      `;
+
+      // Join Ride Form
+      const form = document.createElement("form");
+      form.innerHTML = `
+          <input type='hidden' name='ride_id' value='${ride.id}'>
+          <button type='button' class='join-btn' data-ride-id='${ride.id}' onclick='confirmJoinRide(this)'>Join Ride</button>
+      `;
+
+      // Append everything
+      rideCard.appendChild(rideInfo);
+      rideCard.appendChild(form);
+      resultsContainer.appendChild(rideCard);
+  });
 }
+
+// Function to hide upcoming rides
+function hideUpcomingRides() {
+  const heading=document.querySelector('.upcoming-rides-heading');
+  heading.style.display='none';
+  const upcomingRides = document.querySelectorAll('.ride-card');
+  upcomingRides.forEach((ride) => {
+    ride.style.display = 'none';
+  });
+}
+
+// Function to show upcoming rides again
+function showUpcomingRides() {
+  const heading=document.querySelector('.upcoming-rides-heading');
+  heading.style.display='block';
+  const upcomingRides = document.querySelectorAll('.ride-card');
+  upcomingRides.forEach((ride) => {
+    ride.style.display = 'block'; // You can adjust this to the appropriate style for showing rides
+  });
+}
+
+
   // Open the modal when Create Ride button is clicked
   document.getElementById("createRideBtn").addEventListener("click", openModal);
 
