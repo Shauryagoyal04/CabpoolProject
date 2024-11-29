@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error:", error);
         });
 });
-
 function displayMyBookings(bookings) {
     const container = document.querySelector("#bookings-container");
     container.innerHTML = ""; // Clear previous content
@@ -23,34 +22,34 @@ function displayMyBookings(bookings) {
         rideCard.classList.add("ride-card");
 
         // Determine the class for ride status
-        const statusClass = booking.ride_status === "Upcoming" ? "upcoming" : "completed";
+        const statusClass = booking.status === "upcoming" ? "upcoming" : "completed";
 
         // Build the card HTML structure
         rideCard.innerHTML = `
             <div class="ride-info">
                 <span><strong>From:</strong> ${booking.leaving_from}</span>
                 <span><strong>To:</strong> ${booking.going_to}</span>
-                <span><strong>Driver:</strong> ${booking.owner_name}</span>
+                <span><strong>Owner:</strong> ${booking.owner_name}</span>
                 <span><strong>Time:</strong> ${booking.ride_time}</span>
                 <span><strong>Seats Available:</strong> ${booking.seats_available}</span>
-                <span class="ride-status ${statusClass}">${booking.ride_status}</span>
+                <span class="ride-status ${statusClass}">${booking.status}</span>
             </div>
         `;
 
         // Add the rating section only for completed rides
-        if (booking.ride_status === "Completed") {
-            if (booking.user_rating) {
+        if (booking.status === "completed") {
+            if (booking.rated === 1) {
                 // If the user has already rated, display the rating
                 rideCard.innerHTML += `
                     <div class="rating-section">
-                        <span><strong>Your Rating:</strong> ${booking.user_rating}</span>
+                        <span><strong>Your Rating:</strong> ${booking.rating}</span>
                     </div>
                 `;
             } else {
                 // If not rated, show the rating form
                 rideCard.innerHTML += `
                     <div class="rating-section">
-                        <h4>Rate the Driver</h4>
+                        <h4>Rate the Owner</h4>
                         <form>
                             <label>
                                 <input type="radio" name="rating_${booking.id}" value="1"> 1
@@ -67,7 +66,7 @@ function displayMyBookings(bookings) {
                             <label>
                                 <input type="radio" name="rating_${booking.id}" value="5"> 5
                             </label>
-                            <button type="button" onclick="submitRating(${booking.id}, this)">Submit Rating</button>
+                            <button type="button" class="btn" onclick="submitRating(${booking.id}, this)">Submit Rating</button>
                         </form>
                     </div>
                 `;
@@ -79,10 +78,8 @@ function displayMyBookings(bookings) {
 }
 
 
-function rateOwner(ownerName) {
-    // Redirect to a rating page or open a modal
-    window.location.href = `rate-driver.html?username=${encodeURIComponent(ownerName)}`;
-}function submitRating(rideId) {
+
+function submitRating(rideId) {
     const ratingElement = document.querySelector(`input[name="rating_${rideId}"]:checked`);
     if (ratingElement) {
         const selectedRating = ratingElement.value;
@@ -116,5 +113,6 @@ function rateOwner(ownerName) {
         alert("Please select a rating.");
     }
 }
+
 
 

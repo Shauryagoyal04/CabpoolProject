@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 
         // Fetch rides booked by the user
         $sql = "SELECT rides.id, rides.leaving_from, rides.going_to, rides.ride_time, rides.owner_name, 
-                       rides.seats_available, bookings.status 
+                       rides.seats_available, bookings.status, bookings.rated, bookings.rating 
                 FROM rides
                 INNER JOIN bookings ON rides.id = bookings.ride_id
                 WHERE bookings.user_name = '$username'
@@ -32,16 +32,14 @@ if ($conn->connect_error) {
                 // Determine if the ride is completed or upcoming
                 $rideTime = strtotime($row["ride_time"]);
                 $currentTime = time();
-                
-                // Compare the current time with the ride time
-                $ride_status = ($rideTime < $currentTime) ? "Completed" : "Upcoming";
-                $row["ride_status"] = $ride_status;
 
-                // Optional: Update the ride_status in the database (if needed)
-                if ($ride_status == "Completed") {
-                    // You can update the status in the database if you want it to persist
-                    $updateStatusQuery = "UPDATE rides SET status = 'Completed' WHERE id = " . $row["id"];
+                if ($rideTime < $currentTime && $row["status"] !== "completed") {
+                    // Update status in the database if not already completed
+                    $updateStatusQuery = "UPDATE rides SET status = 'completed' WHERE id = " . $row["id"];
                     $conn->query($updateStatusQuery);
+                    $row["status"] = "completed";
+                } else {
+                    $row["status"] = "upcoming";
                 }
 
                 // Add ride information to response

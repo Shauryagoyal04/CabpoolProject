@@ -1,5 +1,5 @@
-/* Add some basic styles for the cards */
-body {
+ /* Add some basic styles for the cards */
+ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: url('signup.png') no-repeat center center fixed; 
     background-size: cover; /* Make the background cover the entire page */
@@ -37,53 +37,13 @@ h1 {
     margin-bottom: 10px; /* Space between info and button */
 }
 
-.ride-status.upcoming {
-    color: green;
+.ride-status {
     font-weight: bold;
-}
-
-.ride-status.completed {
-    color: red;
-    font-weight: bold;
-}
-
-.rate-btn {
     margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
 }
-
-.rate-btn:hover {
-    background-color: #0056b3;
+.ride-status.upcoming {
+    color: rgb(23, 197, 23);
 }
-.rating-section{
-    display: block;
-    font-size: 1em;
-    color: #fffbfb;
-    margin-bottom: 10px;
+.ride-status.completed {
+    color: rgb(255, 21, 0);
 }
-
-/* Submit Button */
-.btn {
-    background-color: #1565c0; /* Blue color */
-    color: white;
-    padding: 8px 20px;
-    font-size: 14px;
-    
-    border: none;
-    border-radius: 50px; /* Curved corners for the button (50px curve) */
-    cursor: pointer;
-    margin-left: 10px;
-    transition: background-color 0.3s ease;
-    
-  }
-  
-  /* Hover effect for button */
-  .btn:hover {
-    background-color: #0d47a1; /* Darker Blue when hovered */
-  }
-  

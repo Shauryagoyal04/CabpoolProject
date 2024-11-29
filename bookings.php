@@ -7,24 +7,12 @@
     <link rel="stylesheet" href="style/mybookings.css"> <!-- Link to external CSS -->
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
+<div class="rides-page">
         <h1>My Bookings</h1>
-    </header>
-
-    <!-- Main Content Section -->
-    <main>
-        <section id="bookings-container">
-            <!-- Bookings will be dynamically loaded here -->
-        </section>
-    </main>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 Cab Pool Project</p>
-    </footer>
-
-    <!-- External JavaScript -->
+        <div id="bookings-container">
+            <!-- Ride cards will be dynamically injected here -->
+        </div>
+    </div>
     <script src="javascript/mybookings.js"></script> <!-- Link to external JavaScript -->
 </body>
 </html>

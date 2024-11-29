@@ -44,7 +44,7 @@ if (isset($_SESSION['username'])) {
     <div class="navbar-right">
       <a href="bookings.php" class="nav-link">My Bookings</a>
       <a href="myrides.php" class="nav-link">My Rides</a>
-      <a href="#" class="nav-link">Profile</a>
+      <a href="php/profile.php" class="nav-link">Profile</a>
     </div>
   </div>
   <!-- Create Ride Modal -->
