@@ -1,162 +1,216 @@
-   /* Navbar Styling */
-   .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #333;
-    color: white;
-    font-family: Arial, sans-serif;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   background: url('signup.png') no-repeat center center fixed; 
+  background-size: cover; /* Make the background cover the entire page */
+  color: #414141; /* Default text color (Dark Gray) */
+  line-height: 1.6;
+  background-color: #212121;
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}  
+   
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #0c0c0c4b;
+  color: white;
+  border-bottom: 1px solid #4d4d4d;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+/* Main Content */
+.main-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 0; /* Remove gap between elements */
+}
+/* Main Content */
+.main-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+  width: 100%; /* Ensure full width for proper alignment */
+}
+
+/* Search Bar Styling */
+.search-bar {
+  display: flex;
+  gap: 0;
+  flex: 1;
+  margin-right: 0%;
+  margin-left: 5%;
+  border-radius: 8px;
+}
+
+/* Make each input and select element take up equal space */
+.search-bar input,
+.search-bar select {
+  padding: 10px;
+  width: 22%; /* Adjust width so they fit together nicely */
+  border: 1px solid #444; /* Dark grey border to match the background theme */
+  background-color: #323232; /* Dark grey background for the fields */
+  color: #c0c0c0; /* Light text color for contrast */
+  border-radius: 0px;
+  font-size: 1em;
+  margin: 0;
+}
+
+/* Consistent text styling for placeholder text across all fields */
+.search-bar input::placeholder,
+.search-bar select option {
+  color: #c4c4c4; /* Light grey for placeholder text */
+  font-style: italic; /* Optional: differentiate placeholder text */
+}
+
+/* Add focus effect for better accessibility */
+.search-bar input:focus,
+.search-bar select:focus {
+  outline: none;
+  border-color: #f39c12; /* Yellow border color on focus */
+    box-shadow: 0 0 10px #f39c12; /* Add glowing effect with yellow outline */
+}
+
+/* Buttons container styling */
+.buttons-container {
+  display: flex;
+  width: 20%; /* Adjust width of the container holding the buttons */
+  margin-right: 2%;
+  margin-left: 1%;
+}
+
+/* Search Button Styling */
+.search-btn, .create-ride-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+/* Hover effect for buttons */
+.search-btn:hover, .create-ride-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Sign Up Button */
+.create-ride-btn {
+  background-color: #fbc02d; /* Dark yellow for sign-up */
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.create-ride-btn:hover {
+  background-color: #f57f17;
+  
+}
+
+.upcoming-rides-heading{
+  font-size: 1.5em;
+  color: #fffbfb;
+  margin-right: 5%;
+}
+/* Ride List Styling */
+.ride-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+  gap: 20px; /* Space between cards */
+  padding: 20px;
+  background-color: #0c0c0c4b; /* Light background for the ride list */
+}
+
+/* Individual Ride Card Styling */
+.ride-card {
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: space-between; /* Space out content */
+  align-items: flex-start; /* Align content to the left */
+  padding: 20px;
+  background-color: #2b2d2e; /* Light grey background for the ride card */
+  border-radius: 8px;
+  border: 1px solid #2b2d2e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for hover effects */
+  height: auto; /* Allow height to adjust based on content */
+}
+
+.ride-card:hover {
+  transform: translateY(-2px); /* Float up on hover */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
+}
+
+/* Ride Info Styling */
+.ride-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ride-info span {
+  font-size: 1em;
+  color: #fffbfb;
+  margin-bottom: 10px; /* Space between info and button */
+}
+
+/* Ride Owner Styling */
+.ride-owner {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #007bff; /* Blue color for the ride owner's name */
+}
+
+/* Join Button Styling */
+.join-btn {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  align-self: center; /* Center the button within the card */
+  margin-top: auto; /* Push button to the bottom */
+}
+
+.join-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .ride-list {
+    grid-template-columns: 1fr; /* One card per row on small screens */
   }
+}
 
-  /* Logo Styling on Left */
-  .logo {
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-
-  /* Dropdown Menu Styling */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: #444;
-    min-width: 160px;
-    z-index: 1;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  }
-
-  .dropdown-content a {
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-  }
-
-  .dropdown-content a:hover {
-    background-color: #555;
-  }
-
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-
-  /* Create Ride Button Styling */
-  .create-ride-btn {
-    padding: 8px 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    margin-right: 10px;
-  }
-
-  .create-ride-btn:hover {
-    background-color: #218838;
-  }
-
-  /* Main Content Styling */
-  .main-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-
-  /* Search Bar Styling */
-  .search-bar {
-    display: flex;
-    gap: 10px;
-    flex: 1;
-  }
-
-  .search-bar input, .search-bar select {
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-  }
-
-  /* Search Button Styling */
-  .search-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-  }
-
-  .search-btn:hover {
-    background-color: #0056b3;
-  }
-
-  /* Navbar Right Section */
-  .navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-       /* Ride List Styling */
-    .ride-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding: 20px;
-    }
-
-    /* Individual Ride Card Styling */
-    .ride-card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      font-family: Arial, sans-serif;
-    }
-
-    .ride-info {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .ride-info span {
-      font-size: 0.9em;
-      color: #333;
-    }
-
-    .ride-owner {
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-
-    .join-btn {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .join-btn:hover {
-      background-color: #0056b3;
-    }
 
     /* Modal styling */
 .modal {
@@ -172,46 +226,94 @@
 }
 
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  position: relative;
+  background-color: #2b2d2e; /* Darker Gray for form box background */
+    padding: 30px 40px;
+    width: 400px;
+    text-align: center;
+    border-radius: 50px;
+    border-width: 5px;
+    border-color:linear-gradient(145deg, #f39c12, #1565c0); /* Curved corners for the form (50px curve) */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Soft shadow with higher opacity */
+    position: relative; /* To position the pseudo element */
+}
+/* Form Box Gradient Border */
+.model-content::before {
+  content: '';
+  position: absolute;
+  top: -5px; 
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(145deg, #f39c12, #1565c0); /* Yellow to Blue gradient */
+  border-radius: 50px; /* Apply curve to the gradient outline */
+  z-index: 0; /* Ensure the border is behind the form content */
+}
+/* Header */
+header {
+  font-size: 28px;
+  color: #f8f9fae9; /* Light Gray for the title */
+  font-weight: 600;
+  margin-bottom: 30px;
 }
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   cursor: pointer;
   font-size: 20px;
 }
-
-label {
-  display: block;
-  margin: 8px 0 4px;
+/* Form Field */
+.field {
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-input {
+/* Input fields */
+.input input {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 14px;
+  margin-top: 8px;
+  border: 1px solid #303132; /* Light Gray border for the input fields */
+  border-radius: 50px; /* Curved corners for input fields (50px curve) */
+  font-size: 16px;
+  color: #ecf0f1; /* Light Gray text color */
+  background-color: #33373a; /* Slightly lighter gray for the input fields */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-button {
-  padding: 10px;
-  background-color: #007bff;
+/* Input Focus Effect */
+.input input:focus {
+  outline: none;
+  border-color: #f39c12; /* Yellow border color on focus */
+  box-shadow: 0 0 10px #f39c12; /* Add glowing effect with yellow outline */
+}
+
+/* Input Placeholder Styling */
+.input input::placeholder {
+  color: #9f9f9f; /* Grayish color for placeholder */
+  opacity: 1; /* Ensures placeholder text is visible */
+}
+
+/* Submit Button */
+.btn {
+  background-color: #1565c0; /* Blue color */
   color: white;
+  padding: 14px 30px;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px; /* Curved corners for the button (50px curve) */
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
 }
 
-button:hover {
-  background-color: #0056b3;
+/* Hover effect for button */
+.btn:hover {
+  background-color: #0d47a1; /* Darker Blue when hovered */
 }
+
 
 /* Message box styling */
 .message-box {
@@ -219,7 +321,7 @@ button:hover {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #28a745;
+  background-color: #007bff;
   color: white;
   padding: 15px;
   border-radius: 5px;

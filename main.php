@@ -16,6 +16,8 @@ if (isset($_SESSION['username'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cab Sharing Navbar</title>
   <link rel="stylesheet" href="style/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -31,70 +33,65 @@ if (isset($_SESSION['username'])) {
     <span class="close-message-btn" onclick="closeMessageBox()">&times;</span>
   </div>
   <!-- Navbar -->
-  <div class="navbar">
+   <!-- Navbar -->
+   <div class="navbar">
     <!-- Logo on Left -->
     <div class="logo">
-      <a href="#" style="color: white; text-decoration: none;">MyLogo</a>
+      <a href="#" style="color: white; text-decoration: none;">RideShare</a>
     </div>
 
-    <!-- Right Side: Create Ride Button and Dropdown Menu -->
+    <!-- Right Side: Options -->
     <div class="navbar-right">
-      <!-- Create Ride Button -->
-      <button id="createRideBtn" class="create-ride-btn">Create Ride</button>
-
-      <!-- Dropdown Menu -->
-      <div class="dropdown">
-        <a href="#" style="color: white; text-decoration: none;">Menu</a>
-        <div class="dropdown-content">
-          <a href="#">Profile</a>
-          <a href="bookings.php">My Bookings</a>
-          <a href="">My Rides</a>
-          <a href="#">History</a>
-        </div>
-      </div>
+      <a href="bookings.php" class="nav-link">My Bookings</a>
+      <a href="myrides.php" class="nav-link">My Rides</a>
+      <a href="#" class="nav-link">Profile</a>
     </div>
   </div>
   <!-- Create Ride Modal -->
 <div id="createRideModal" class="modal">
   <div class="modal-content">
     <span class="close-btn" onclick="closeModal()">&times;</span>
-    <h2>Create a New Ride</h2>
+    <header>Create a New Ride</header>
     <form id="rideForm">
-      <label for="leaving_from">Leaving From:</label>
-      <input type="text" name="leaving_from" id="leaving_from" required>
-
-      <label for="going_to">Going To:</label>
-      <input type="text" name="going_to" id="going_to" required>
-
-      <label for="ride_time">Date and Time:</label>
-      <input type="datetime-local" name="ride_time" id="ride_time" required>
-
-      <label for="seats_available">Seats Available:</label>
-      <input type="number" name="seats_available" id="seats_available" required min="1">
-
-      <button type="button" onclick="submitRideForm()">Submit</button>
+      <div class="field input">
+      <input type="text" name="leaving_from" id="leaving_from" placeholder="Leaving from" required>
+      </div>
+      <div class="field input">
+      <input type="text" name="going_to" id="going_to" placeholder="Going to" required>
+      </div>
+      <div class="field input">
+      <input type="datetime-local" name="ride_time" id="ride_time" placeholder="Date and time" required>
+      </div>
+      <div class="field input">
+      <input type="number" name="seats_available" id="seats_available" placeholder="Seats Available" required min="1">
+      </div>
+      <button type="button" class= "btn"onclick="submitRideForm()">Submit</button>
     </form>
   </div>
 </div>
 
 
-  <!-- Main Content -->
+<div class="main-content">
   <div class="search-bar">
-   <input type="text" name="leaving_from" placeholder="Leaving From" />
-   <input type="text" name="going_to" placeholder="Going To" />
-   <input type="date" name="ride_date" placeholder="Date" />
-   <select name="passengers">
-     <option value="">Passengers</option>
-     <option value="1">1</option>
-     <option value="2">2</option>
-   </select>
+    <input type="text" name="leaving_from" class="leaving" placeholder="Leaving From" />
+    <input type="text" name="going_to" placeholder="Going To" />
+    <input type="datetime-local" name="ride_date" placeholder="Date" />
+    <select name="passengers">
+      <option value="">Passengers</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+    <button class="search-btn">Search</button>
+  </div>
+  <div class="buttons-container">
+    
+    <button  id="createRideBtn" class="create-ride-btn">Create Ride</button>
+  </div>
 </div>
 
-<!-- Search Button -->
-<button class="search-btn" id="search-btn">Search</button>
 
 <div id="rides-container"></div>
-
+    <div class='upcoming-rides-heading'>Upcoming Rides</div>
  <!-- Upcoming Rides Section -->
  <div class="ride-list">
   <?php
@@ -110,13 +107,13 @@ if (isset($_SESSION['username'])) {
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
-      echo "<div class='upcoming-rides-heading'>UPCOMING RIDES</div>";
+      
     while ($row = $result->fetch_assoc()) {
       echo "<div class='ride-card' id='ride-card'>";
       echo "<div class='ride-info'>";
       echo "<span><strong>From:</strong> " . $row["leaving_from"] . "</span>";
       echo "<span><strong>To:</strong> " . $row["going_to"] . "</span>";
-      echo "<span class='ride-owner'>Driver: " . $row["owner_name"] . "</span>";
+      echo "<span class='ride-owner'>Owner: " . $row["owner_name"] . "</span>";
       echo "<span><strong>Time:</strong> " . $row["ride_time"] . "</span>";
       echo "<span><strong>Seats Available:</strong> " . $row["seats_available"] . "</span>";
       echo "</div>";

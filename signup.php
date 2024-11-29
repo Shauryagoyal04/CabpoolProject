@@ -63,6 +63,9 @@
                     <input type="text" name="username" id="username" placeholder="Name" autocomplete="off" required>
                 </div>
                 <div class="field input">
+                    <input type="text" name="enrollment_num" id="enrollment_num" placeholder="Enrollment Number" autocomplete="off" required>
+                </div>
+                <div class="field input">
                     <input type="email" name="email_id" id="email_id" placeholder="Email" autocomplete="off" required>
                 </div>
                 <div class="field input">

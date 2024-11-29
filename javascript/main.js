@@ -130,41 +130,54 @@ function confirmJoinRide(button) {
 function displaySearchResults(rides) {
   // Clear previous search results
   const resultsContainer = document.querySelector("#rides-container");
-  resultsContainer.innerHTML = ""; // Clear existing rides
+  resultsContainer.innerHTML = ""; // Clear the rides-container
 
   // Hide upcoming rides when showing search results
   hideUpcomingRides();
 
-  // Add the filtered rides dynamically
+  // Check if a .ride-list exists; if not, create one
+  let rideList = document.querySelector(".ride-list");
+  if (!rideList) {
+    rideList = document.createElement("div");
+    rideList.classList.add("ride-list");
+    resultsContainer.appendChild(rideList); // Append the ride-list to the results container
+  } else {
+    rideList.innerHTML = ""; // Clear existing rides in ride-list
+  }
+
+  // Dynamically create and add the ride cards to the ride list
   rides.forEach((ride) => {
-      const rideCard = document.createElement("div");
-      rideCard.classList.add("ride-card");
+    const rideCard = document.createElement("div");
+    rideCard.classList.add("ride-card");
 
-      // Ride Info
-      const rideInfo = document.createElement("div");
-      rideInfo.classList.add("ride-info");
+    // Ride Info
+    const rideInfo = document.createElement("div");
+    rideInfo.classList.add("ride-info");
 
-      rideInfo.innerHTML = `
-          <span><strong>From:</strong> ${ride.leaving_from}</span>
-          <span><strong>To:</strong> ${ride.going_to}</span>
-          <span class='ride-owner'>Driver: ${ride.owner_name}</span>
-          <span><strong>Time:</strong> ${ride.ride_time}</span>
-          <span><strong>Seats Available:</strong> ${ride.seats_available}</span>
-      `;
+    rideInfo.innerHTML = `
+      <span><strong>From:</strong> ${ride.leaving_from}</span>
+      <span><strong>To:</strong> ${ride.going_to}</span>
+      <span class='ride-owner'>Driver: ${ride.owner_name}</span>
+      <span><strong>Time:</strong> ${ride.ride_time}</span>
+      <span><strong>Seats Available:</strong> ${ride.seats_available}</span>
+    `;
 
-      // Join Ride Form
-      const form = document.createElement("form");
-      form.innerHTML = `
-          <input type='hidden' name='ride_id' value='${ride.id}'>
-          <button type='button' class='join-btn' data-ride-id='${ride.id}' onclick='confirmJoinRide(this)'>Join Ride</button>
-      `;
+    // Join Ride Form
+    const form = document.createElement("form");
+    form.innerHTML = `
+      <input type='hidden' name='ride_id' value='${ride.id}'>
+      <button type='button' class='join-btn' data-ride-id='${ride.id}' onclick='confirmJoinRide(this)'>Join Ride</button>
+    `;
 
-      // Append everything
-      rideCard.appendChild(rideInfo);
-      rideCard.appendChild(form);
-      resultsContainer.appendChild(rideCard);
+    // Append ride info and form to the ride card
+    rideCard.appendChild(rideInfo);
+    rideCard.appendChild(form);
+
+    // Append the ride card to the ride list
+    rideList.appendChild(rideCard);
   });
 }
+
 
 // Function to hide upcoming rides
 function hideUpcomingRides() {
