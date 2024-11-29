@@ -29,7 +29,7 @@
       <div class="dropdown">
         <a href="#" style="color: white; text-decoration: none;">Menu</a>
         <div class="dropdown-content">
-          <a href="#">Profile</a>
+          <a href="profile.php">Profile</a>
           <a href="#">My Bookings</a>
           <a href="#">My Rides</a>
           <a href="#">History</a>

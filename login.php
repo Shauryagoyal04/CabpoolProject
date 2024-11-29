@@ -30,6 +30,7 @@
 
             // Check if a valid row was returned (both email and password are correct)
             if ($row) {
+                $_SESSION['enrollment_num'] = $row['enrollment_num'];
                 $_SESSION['valid'] = $row['email_id'];
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['age'] = $row['age'];
