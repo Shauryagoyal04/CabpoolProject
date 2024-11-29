@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cab Sharing Navbar</title>
+  <link rel="stylesheet" href="style/main.css">
+</head>
+<body>
+
+  <!-- Success/Error Message Box -->
+  <div id="messageBox" class="message-box">
+    <span id="messageText"></span>
+    <span class="close-message-btn" onclick="closeMessageBox()">&times;</span>
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <!-- Logo on Left -->
+    <div class="logo">
+      <a href="#" style="color: black; text-decoration: none;">𐂯RIDESHARE</a>
+    </div>
+
+    <!-- Navbar Links on the Right -->
+    <div class="navbar-right">
+      <a href="#" class="navbar-link">Profile</a>
+      <a href="#" class="navbar-link">My Bookings</a>
+      <a href="#" class="navbar-link">My Rides</a>
+      <a href="#" class="navbar-link">History</a>
+    </div>
+  </div>
+
+  <!-- Create Ride Modal -->
+  <div id="createRideModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Create a New Ride</h2>
+      <form id="rideForm">
+        <label for="leaving_from">Leaving From:</label>
+        <input type="text" name="leaving_from" id="leaving_from" required>
+
+        <label for="going_to">Going To:</label>
+        <input type="text" name="going_to" id="going_to" required>
+
+        <label for="ride_time">Date and Time:</label>
+        <input type="datetime-local" name="ride_time" id="ride_time" required>
+
+        <label for="seats_available">Seats Available:</label>
+        <input type="number" name="seats_available" id="seats_available" required min="1">
+
+        <button type="button" onclick="submitRideForm()">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="search-bar">
+    <!-- Search Form -->
+    <input type="text" name="leaving_from" placeholder="Leaving From" />
+    <input type="text" name="going_to" placeholder="Going To" />
+    <input type="date" name="ride_date" placeholder="Date" />
+    <select name="passengers">
+      <option value="">Passengers</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div>
+
+  <!-- Buttons Below Search Bar -->
+  <div class="button-container">
+    <button class="search-btn" id="search-btn">Search</button>
+    <button class="create-ride-btn" id="createRideBtn">Create Ride</button>
+  </div>
+
+  <div id="rides-container"></div>
+
+  <!-- Upcoming Rides Section -->
+  <div class="ride-list"></div>
+
+  <script src="javascript/main.js"></script>
+</body>
+</html>

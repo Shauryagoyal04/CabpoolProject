@@ -40,7 +40,7 @@ if ($conn->connect_error) {
                 if (!empty($updateQuery)) {
                     if ($conn->query($updateQuery) === TRUE) {
                         // Insert into bookings table
-                        $bookingQuery = "INSERT INTO bookings (user_name, ride_id, status) 
+                        $bookingQuery = "INSERT INTO bookings (username, ride_id, status) 
                                          VALUES ('$username', $rideId, 'Upcoming')";
 
                         if ($conn->query($bookingQuery) === TRUE) {

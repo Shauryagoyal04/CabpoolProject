@@ -20,6 +20,7 @@ if ($conn->connect_error) {
     // Fetch logged-in user's username from the session
     if (isset($_SESSION['username'])) {
         $ownername = $_SESSION['username'];
+        
 
         // Insert ride details into the database
         $sql = "INSERT INTO rides (leaving_from, going_to, ride_time, seats_available, owner_name) 

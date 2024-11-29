@@ -34,7 +34,12 @@
 
             // Verify email uniqueness
             $verify_emailid = mysqli_query($con, "SELECT email_id FROM user_info WHERE email_id='$email_id'");
-            if (mysqli_num_rows($verify_emailid) != 0) {
+            $verify_username = mysqli_query($con, "SELECT username FROM user_info WHERE username='$username'");
+            if (mysqli_num_rows($verify_username) != 0) {
+                echo "<div class='message'><p>This username is already in use. Try another one!</p></div><br>";
+                echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button></a>";
+            }
+            else if (mysqli_num_rows($verify_emailid) != 0) {
                 echo "<div class='message'><p>This email is already in use. Try another one!</p></div><br>";
                 echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button></a>";
             } else {
@@ -61,7 +66,7 @@
                     <input type="email" name="email_id" id="email_id" placeholder="Email" autocomplete="off" required>
                 </div>
                 <div class="field input">
-                    <input type="number" name="phone_num" id="phone_num" placeholder="Phone Number" autocomplete="off" required>
+                    <input type="tel" name="phone_num" id="phone_num" placeholder="Phone Number" autocomplete="off" required>
                 </div>
                 <div class="field input">
                     <input type="password" name="password" id="password" placeholder="Password" autocomplete="off" required>

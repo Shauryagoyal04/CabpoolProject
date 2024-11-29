@@ -8,7 +8,7 @@
 /* Body Styling */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('bgcabpool.jpg') no-repeat center center fixed; /* Background Image */
+    background: url('signup.png') no-repeat center center fixed; /* Background Image */
     background-size: cover; /* Make the background cover the entire page */
     color: #414141; /* Default text color (Dark Gray) */
     line-height: 1.6;

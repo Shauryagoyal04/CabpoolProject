@@ -47,8 +47,8 @@ if (isset($_SESSION['username'])) {
         <a href="#" style="color: white; text-decoration: none;">Menu</a>
         <div class="dropdown-content">
           <a href="#">Profile</a>
-          <a href="#">My Bookings</a>
-          <a href="#">My Rides</a>
+          <a href="bookings.php">My Bookings</a>
+          <a href="">My Rides</a>
           <a href="#">History</a>
         </div>
       </div>
