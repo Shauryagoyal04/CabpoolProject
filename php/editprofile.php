@@ -134,7 +134,7 @@ $conn->close();
         </div>
         <form class="profile-form" action="editprofile.php" method="post">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="username" value="<?php echo htmlspecialchars($user['name']); ?>" required>
+            <input type="text" id="name" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
 
             <label for="email_id">Email:</label>
             <input type="email" id="email_id" name="email_id" value="<?php echo htmlspecialchars($user['email_id']); ?>" required>
@@ -146,7 +146,7 @@ $conn->close();
 
             <div class="profile-actions">
                 <button type="submit">Update Profile</button>
-                <a href="profile.php">Cancel</a>
+                <a href="/profile.php">Cancel</a>
             </div>
         </form>
     </div>

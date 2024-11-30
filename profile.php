@@ -2,11 +2,11 @@
 session_start();
 $enrollment_num = isset($_SESSION['enrollment_num']) ? $_SESSION['enrollment_num'] : null;
 
-// If the enrollment_number is not set in the session, show a message and exit
 if (!$enrollment_num) {
-    echo "No user is logged in.";
+    echo "No user is logged in. Session enrollment number is empty.";
     exit();
 }
+
 
 
 // Database connection
@@ -17,32 +17,39 @@ $dbname = "cabpoolproject";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Database connection failed: " . $conn->connect_error);
+} else {
+    
 }
 
-// Fetch user details based on enrollment number
-$sql = "SELECT *, 
-        CASE 
-            WHEN numberofrating > 0 THEN rating / numberofrating 
-            ELSE 0 
-        END AS final_rating 
+// Sanitize input
+$enrollment_num = $conn->real_escape_string($enrollment_num);
+
+// SQL query
+$sql = "SELECT *
+        
+            
         FROM user_info 
         WHERE enrollment_num = '$enrollment_num'";
 
+
+
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     $user = $result->fetch_assoc();
+   
 } else {
-    echo "User not found.";
+    echo "Query executed but no user found. Rows returned: " . ($result ? $result->num_rows : 0);
     exit();
 }
 
-
 $conn->close();
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -126,7 +133,7 @@ $conn->close();
     <div class="profile-container">
         <div class="profile-header">
             <h2>Profile Details</h2>
-            <p>Welcome, <?php echo htmlspecialchars($user['name']); ?>!</p>
+            <p>Welcome, <?php echo htmlspecialchars($user['username']); ?>!</p>
         </div>
         <ul class="profile-details">
             <li>
@@ -146,7 +153,7 @@ $conn->close();
            
             <li>
     <strong>Rating:</strong>
-    <span><?php echo htmlspecialchars(number_format($user['final_rating'], 2)); ?></span>
+    <span><?php echo htmlspecialchars(number_format($user['rating'], 2)); ?></span>
 </li>
 
         </ul>

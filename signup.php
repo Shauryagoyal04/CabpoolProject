@@ -15,6 +15,7 @@
         include("php/config.php");
 
         if (isset($_POST['submit'])) {
+            $enrollment_num = htmlspecialchars($_POST['enrollment_num']);
             $username = htmlspecialchars($_POST['username']);
             $email_id = htmlspecialchars($_POST['email_id']);
             $phone_num = htmlspecialchars($_POST['phone_num']);
@@ -44,8 +45,8 @@
                 echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button></a>";
             } else {
                 // Insert user data into the database
-                $stmt = $con->prepare("INSERT INTO user_info(username, email_id, phone_num, password, created_at) VALUES (?, ?, ?, ?, NOW())");
-                $stmt->bind_param("ssss", $username, $email_id, $phone_num, $password);
+                $stmt = $con->prepare("INSERT INTO user_info(username, enrollment_num, email_id, phone_num, password, created_at) VALUES (?, ?, ?,?, ?, NOW())");
+                $stmt->bind_param("sssss", $username, $enrollment_num, $email_id, $phone_num, $password);
 
                 if ($stmt->execute()) {
                     echo "<div class='message'><p>Registration successful!</p></div><br>";
