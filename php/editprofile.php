@@ -33,21 +33,17 @@ if ($result->num_rows > 0) {
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $name = mysqli_real_escape_string($conn, $_POST['username']);
     $email_id = mysqli_real_escape_string($conn, $_POST['email_id']);
-    $year = mysqli_real_escape_string($conn, $_POST['year']);
+    
     $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
-    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
-    $age = mysqli_real_escape_string($conn, $_POST['age']);
+    
 
     // Update the user details
     $update_sql = "UPDATE user_info SET 
-                    name='$name', 
-                    email_id='$email_id',  
-                    year='$year', 
-                    phone_num='$phone_num', 
-                    gender='$gender', 
-                    age='$age' 
+                    username='$name', 
+                    email_id='$email_id',                
+                    phone_num='$phone_num' 
                     WHERE enrollment_num='$enrollment_num'";
                     
     if ($conn->query($update_sql) === TRUE) {
@@ -138,26 +134,15 @@ $conn->close();
         </div>
         <form class="profile-form" action="editprofile.php" method="post">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
+            <input type="text" id="name" name="username" value="<?php echo htmlspecialchars($user['name']); ?>" required>
 
             <label for="email_id">Email:</label>
             <input type="email" id="email_id" name="email_id" value="<?php echo htmlspecialchars($user['email_id']); ?>" required>
 
-            <label for="year">Year:</label>
-            <input type="number" id="year" name="year" value="<?php echo htmlspecialchars($user['year']); ?>" required>
+            
 
             <label for="phone">Phone:</label>
             <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($user['phone_num']); ?>" required>
-
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="Male" <?php if ($user['gender'] == 'Male') echo 'selected'; ?>>Male</option>
-                <option value="Female" <?php if ($user['gender'] == 'Female') echo 'selected'; ?>>Female</option>
-                <option value="Other" <?php if ($user['gender'] == 'Other') echo 'selected'; ?>>Other</option>
-            </select>
-
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age" value="<?php echo htmlspecialchars($user['age']); ?>" required>
 
             <div class="profile-actions">
                 <button type="submit">Update Profile</button>

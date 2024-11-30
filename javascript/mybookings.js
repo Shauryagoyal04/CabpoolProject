@@ -17,32 +17,32 @@ function displayMyBookings(bookings) {
     const container = document.querySelector("#bookings-container");
     container.innerHTML = ""; // Clear previous content
 
-    bookings.forEach((booking) => {
+    bookings.forEach((bookings) => {
         const rideCard = document.createElement("div");
         rideCard.classList.add("ride-card");
 
         // Determine the class for ride status
-        const statusClass = booking.status === "upcoming" ? "upcoming" : "completed";
+        const statusClass = bookings.status === "upcoming" ? "upcoming" : "completed";
 
         // Build the card HTML structure
         rideCard.innerHTML = `
             <div class="ride-info">
-                <span><strong>From:</strong> ${booking.leaving_from}</span>
-                <span><strong>To:</strong> ${booking.going_to}</span>
-                <span><strong>Owner:</strong> ${booking.owner_name}</span>
-                <span><strong>Time:</strong> ${booking.ride_time}</span>
-                <span><strong>Seats Available:</strong> ${booking.seats_available}</span>
-                <span class="ride-status ${statusClass}">${booking.status}</span>
+                <span><strong>From:</strong> ${bookings.leaving_from}</span>
+                <span><strong>To:</strong> ${bookings.going_to}</span>
+                <span><strong>Owner:</strong> ${bookings.owner_name}</span>
+                <span><strong>Time:</strong> ${bookings.ride_time}</span>
+                <span><strong>Seats Available:</strong> ${bookings.seats_available}</span>
+                <span class="ride-status ${statusClass}">${bookings.status}</span>
             </div>
         `;
 
         // Add the rating section only for completed rides
-        if (booking.status === "completed") {
-            if (booking.rated === 1) {
+        if (bookings.status === "completed") {
+            if (bookings.rated === 1) {
                 // If the user has already rated, display the rating
                 rideCard.innerHTML += `
                     <div class="rating-section">
-                        <span><strong>Your Rating:</strong> ${booking.rating}</span>
+                        <span><strong>Your Rating:</strong> ${bookings.rating}</span>
                     </div>
                 `;
             } else {
@@ -52,21 +52,21 @@ function displayMyBookings(bookings) {
                         <h4>Rate the Owner</h4>
                         <form>
                             <label>
-                                <input type="radio" name="rating_${booking.id}" value="1"> 1
+                                <input type="radio" name="rating_${bookings.id}" value="1"> 1
                             </label>
                             <label>
-                                <input type="radio" name="rating_${booking.id}" value="2"> 2
+                                <input type="radio" name="rating_${bookings.id}" value="2"> 2
                             </label>
                             <label>
-                                <input type="radio" name="rating_${booking.id}" value="3"> 3
+                                <input type="radio" name="rating_${bookings.id}" value="3"> 3
                             </label>
                             <label>
-                                <input type="radio" name="rating_${booking.id}" value="4"> 4
+                                <input type="radio" name="rating_${bookings.id}" value="4"> 4
                             </label>
                             <label>
-                                <input type="radio" name="rating_${booking.id}" value="5"> 5
+                                <input type="radio" name="rating_${bookings.id}" value="5"> 5
                             </label>
-                            <button type="button" class="btn" onclick="submitRating(${booking.id}, this)">Submit Rating</button>
+                            <button type="button" class="btn" onclick="submitRating(${bookings.id}, this)">Submit Rating</button>
                         </form>
                     </div>
                 `;

@@ -23,7 +23,14 @@ if ($conn->connect_error) {
 }
 
 // Fetch user details based on enrollment number
-$sql = "SELECT * FROM user_info WHERE enrollment_num = '$enrollment_num'";
+$sql = "SELECT *, 
+        CASE 
+            WHEN numberofrating > 0 THEN rating / numberofrating 
+            ELSE 0 
+        END AS final_rating 
+        FROM user_info 
+        WHERE enrollment_num = '$enrollment_num'";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -32,6 +39,7 @@ if ($result->num_rows > 0) {
     echo "User not found.";
     exit();
 }
+
 
 $conn->close();
 ?>
@@ -130,31 +138,22 @@ $conn->close();
                 <span><?php echo htmlspecialchars($user['email_id']); ?></span>
     </li>
             
-            <li>
-                <strong>Year:</strong>
-                <span><?php echo htmlspecialchars($user['year']); ?></span>
-            </li>
+            
             <li>
                 <strong>Phone:</strong>
                 <span><?php echo htmlspecialchars($user['phone_num']); ?></span>
             </li>
+           
             <li>
-                <strong>Gender:</strong>
-                <span><?php echo htmlspecialchars($user['gender']); ?></span>
-            </li>
-            <li>
-                <strong>Age:</strong>
-                <span><?php echo htmlspecialchars($user['age']); ?></span>
-            </li>
-            <li>
-                <strong>Rating:</strong>
-                <span><?php echo htmlspecialchars($user['rating']); ?></span>
-            </li>
+    <strong>Rating:</strong>
+    <span><?php echo htmlspecialchars(number_format($user['final_rating'], 2)); ?></span>
+</li>
+
         </ul>
         <div class="profile-actions">
             <a href="main.php">Back to Main Page</a>
-            <a href="editprofile.php">edit profile</a>
-            <a href="logout.php">logout</a>
+            <a href="php/editprofile.php">edit profile</a>
+            <a href="php/logout.php">logout</a>
         </div>
     </div>
 </body>
